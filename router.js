@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 // Modulus
-
 router.get('/modulusdea', function(req, res) {
     const angka1 = parseInt(req.body.angka1);
     const angka2 = parseInt(req.body.angka2);
@@ -15,7 +14,6 @@ router.get('/modulusdea', function(req, res) {
         res.status(400).json({
             error: "Modulus dengan nol tidak diperbolehkan"
         });
-    
     } else {
         res.json({
             operasi: "modulus",
@@ -24,6 +22,22 @@ router.get('/modulusdea', function(req, res) {
     }
 });
 
+// Akar Kuadrat
+router.get('/akar-kuadrat/:angka', function(req, res) {
+    const angka = parseFloat(req.params.angka);
+    if (angka < 0) {
+        res.status(400).json({
+            error: "Tidak bisa menghitung akar kuadrat dari bilangan negatif"
+        });
+    } else {
+        const hasil = Math.sqrt(angka);
+        res.json({
+            operasi: "akar kuadrat",
+            angka: angka,
+            hasil: hasil
+        });
+    }
+});
 
 
 module.exports = router;
